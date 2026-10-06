@@ -139,17 +139,59 @@ EDUCATION = [
     },
 ]
 
+# Certificates section. To add a link, paste the URL into "url".
+# Entries with url=None show without a "View certificate" link.
 CERTIFICATES = [
-    ("AWS Certified Cloud Practitioner", "Amazon Web Services", "2026"),
-    ("Web Developer Bootcamp with Flask & Python", "Udemy", "2025"),
-    ("Data Structures", "LinkedIn Learning", "2025"),
-    ("Level Up: C++", "LinkedIn Learning", "2025"),
+    {
+        "group": "Technical",
+        "name": "AWS Certified Cloud Practitioner",
+        "issuer": "Amazon Web Services",
+        "year": "2026",
+        "url": "https://drive.google.com/file/d/1T8PdXZQaHnSgWBlcmN5GK9GpphTxTVbI/view?usp=sharing",
+    },
+    {
+        "group": "Technical",
+        "name": "Web Developer Bootcamp with Flask & Python",
+        "issuer": "Udemy",
+        "year": "2025",
+        "url": None,
+    },
+    {
+        "group": "Technical",
+        "name": "Data Structures",
+        "issuer": "LinkedIn Learning",
+        "year": "2025",
+        "url": None,
+    },
+    {
+        "group": "Technical",
+        "name": "Level Up: C++",
+        "issuer": "LinkedIn Learning",
+        "year": "2025",
+        "url": None,
+    },
+    {
+        "group": "Sports",
+        "name": "Volleyball Zonals, first place",
+        "issuer": "Captain of the college team; qualified for the state-level tournament",
+        "year": None,
+        "url": "https://drive.google.com/file/d/1gZDIeGUL_-Gs2z2tpUULtIFiZ61HGV2q/view?usp=sharing",
+    },
+    {
+        "group": "Sports",
+        "name": "Inter-college Zonal Basketball Championship, first place",
+        "issuer": "College basketball team",
+        "year": None,
+        "url": "https://drive.google.com/file/d/1t_5bZtORaKSyqUdQECrRNI_nC1bCzjvo/view?usp=sharing",
+    },
 ]
 
-BEYOND = [
-    "Captained the college volleyball team to first place in the zonals and a spot in the state-level tournament.",
-    "Won first place in the inter-college zonal basketball championship.",
-]
+
+def certificate_groups():
+    groups = {}
+    for cert in CERTIFICATES:
+        groups.setdefault(cert["group"], []).append(cert)
+    return list(groups.items())
 
 
 def get_project(slug):

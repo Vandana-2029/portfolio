@@ -73,30 +73,44 @@
 
 <section id="background" class="section wrap" aria-labelledby="bg-title">
   <div class="section-head">
-    <h2 id="bg-title">Education and certifications</h2>
+    <h2 id="bg-title">Education</h2>
   </div>
-  <div class="background-grid">
-    <ol class="timeline" role="list">
-      {% for e in education %}
-      <li>
-        <p class="timeline-period">{{ e.period }}</p>
-        <h3>{{ e.title }}</h3>
-        <p class="timeline-place">{{ e.place }}, {{ e.detail }}</p>
-      </li>
-      {% endfor %}
-    </ol>
-    <div>
-      <h3>Certifications</h3>
+  <ol class="timeline" role="list">
+    {% for e in education %}
+    <li>
+      <p class="timeline-period">{{ e.period }}</p>
+      <h3>{{ e.title }}</h3>
+      <p class="timeline-place">{{ e.place }}, {{ e.detail }}</p>
+    </li>
+    {% endfor %}
+  </ol>
+</section>
+
+<section id="certificates" class="section wrap" aria-labelledby="certs-title">
+  <div class="section-head">
+    <h2 id="certs-title">Certificates</h2>
+    <p>Courses and certifications I've completed, plus awards from college sports. Each link opens the certificate in a new tab.</p>
+  </div>
+  <div class="cert-groups">
+    {% for group, certs in certificate_groups %}
+    <div class="cert-group">
+      <h3>{{ group }}</h3>
       <ul class="certs" role="list">
-        {% for name, issuer, yr in certificates %}
-        <li><span class="cert-name">{{ name }}</span><span class="cert-meta">{{ issuer }}, {{ yr }}</span></li>
+        {% for c in certs %}
+        <li>
+          <div>
+            <span class="cert-name">{{ c.name }}</span>
+            <span class="cert-meta">{{ c.issuer }}{% if c.year %}, {{ c.year }}{% endif %}</span>
+          </div>
+          {% if c.url %}
+          <a class="cert-link" href="{{ c.url }}" target="_blank" rel="noopener"
+             aria-label="View certificate: {{ c.name }} (opens in a new tab)">View certificate</a>
+          {% endif %}
+        </li>
         {% endfor %}
       </ul>
-      <h3 class="beyond-title">Off the screen</h3>
-      <ul class="points">
-        {% for b in beyond %}<li>{{ b }}</li>{% endfor %}
-      </ul>
     </div>
+    {% endfor %}
   </div>
 </section>
 

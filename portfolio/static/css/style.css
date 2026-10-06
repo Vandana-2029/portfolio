@@ -218,7 +218,6 @@ img { max-width: 100%; display: block; }
 }
 
 /* ---------- Education ---------- */
-.background-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
 .timeline { align-self: start; list-style: none; margin: 0; padding: 0 0 0 1.5rem; border-left: 2px solid var(--rule); }
 .timeline li { position: relative; padding-bottom: 2rem; }
 .timeline li:last-child { padding-bottom: 0.25rem; }
@@ -229,13 +228,25 @@ img { max-width: 100%; display: block; }
 .timeline h3 { margin-bottom: 0.2rem; }
 .timeline-period { color: var(--muted); font-weight: 500; margin-bottom: 0.25rem; }
 .timeline-place { color: var(--muted); margin: 0; }
-.certs { list-style: none; margin: 0 0 2.5rem; padding: 0; }
-.certs li { display: grid; padding: 0.7rem 0; border-bottom: 1px solid var(--rule); }
+.timeline { max-width: 40rem; }
+
+/* ---------- Certificates ---------- */
+.cert-groups { display: grid; grid-template-columns: 1.4fr 1fr; gap: 4rem; align-items: start; }
+.certs { list-style: none; margin: 0; padding: 0; }
+.certs li {
+  display: flex; justify-content: space-between; align-items: center; gap: 1.5rem;
+  padding: 0.9rem 0; border-bottom: 1px solid var(--rule);
+}
+.certs li > div { display: grid; }
+.cert-link { font-weight: 600; white-space: nowrap; font-size: var(--step--1); }
 .certs li:first-child { border-top: 1px solid var(--rule); }
 .cert-name { font-weight: 600; }
 .cert-meta { color: var(--muted); font-size: var(--step--1); }
 @media (max-width: 860px) {
-  .background-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .cert-groups { grid-template-columns: 1fr; gap: 2.5rem; }
+}
+@media (max-width: 520px) {
+  .certs li { flex-direction: column; align-items: flex-start; gap: 0.35rem; }
 }
 
 /* ---------- Contact ---------- */
@@ -277,6 +288,7 @@ img { max-width: 100%; display: block; }
 @media (max-width: 520px) {
   .header-row { flex-wrap: wrap; padding-block: 0.6rem; row-gap: 0.25rem; }
   .site-header nav { width: 100%; }
-  .nav { justify-content: space-between; gap: 0.5rem; }
+  .nav { flex-wrap: wrap; justify-content: space-between; gap: 0.25rem 0.75rem; }
+  .nav a { font-size: 0.9375rem; }
   .hero-actions .btn { flex: 1 1 auto; justify-content: center; }
 }

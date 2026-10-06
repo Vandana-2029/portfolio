@@ -16,8 +16,7 @@ def render_home(form=None, errors=None, status=200):
         more=more,
         skills=content.SKILLS,
         education=content.EDUCATION,
-        certificates=content.CERTIFICATES,
-        beyond=content.BEYOND,
+        certificate_groups=content.certificate_groups(),
         form=form or {},
         errors=errors or {},
     ), status

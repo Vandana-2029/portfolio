@@ -63,3 +63,14 @@ def test_contact_saves_valid_message(client, tmp_path):
 def test_honeypot_drops_bots(client, tmp_path):
     client.post("/contact", data={"name": "Bot", "email": "b@b.co", "message": "spam spam spam", "website": "x"})
     assert not os.path.exists(os.path.join(tmp_path, "messages.jsonl"))
+
+
+def test_certificates_section_links(client):
+    from markupsafe import escape
+    from portfolio.content import CERTIFICATES
+    html = client.get("/").get_data(as_text=True)
+    assert 'id="certificates"' in html
+    for c in CERTIFICATES:
+        assert str(escape(c["name"])) in html
+        if c["url"]:
+            assert str(escape(c["url"])) in html
