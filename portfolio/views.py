@@ -1,20 +1,46 @@
-from flask import Blueprint, abort, render_template
+from flask import (Blueprint, abort, current_app, flash, redirect,
+                   render_template, request, url_for)
 
 from . import content
+from .contact import save_message, validate
 
 bp = Blueprint("site", __name__)
 
 
-@bp.route("/")
-def home():
+def render_home(form=None, errors=None, status=200):
     featured = [p for p in content.PROJECTS if p["featured"]]
     more = [p for p in content.PROJECTS if not p["featured"]]
     return render_template(
-        "home.html", featured=featured, more=more, skills=content.SKILLS,
+        "home.html",
+        featured=featured,
+        more=more,
+        skills=content.SKILLS,
         education=content.EDUCATION,
         certificates=content.CERTIFICATES,
         beyond=content.BEYOND,
-    )
+        form=form or {},
+        errors=errors or {},
+    ), status
+
+
+@bp.route("/")
+def home():
+    return render_home()
+
+
+@bp.route("/contact", methods=["POST"])
+def contact():
+    # Hidden field that people never see; bots tend to fill it in.
+    if request.form.get("website"):
+        return redirect(url_for("site.home") + "#contact")
+
+    data, errors = validate(request.form)
+    if errors:
+        return render_home(form=data, errors=errors, status=400)
+
+    save_message(current_app.instance_path, data)
+    flash(f"Thanks, {data['name']}. Your message is sent and I'll reply to {data['email']}.")
+    return redirect(url_for("site.home") + "#contact")
 
 
 @bp.route("/projects/<slug>")

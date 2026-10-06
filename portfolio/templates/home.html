@@ -98,7 +98,51 @@
     </div>
   </div>
 </section>
+
+<section id="contact" class="section wrap contact" aria-labelledby="contact-title">
+  <div class="contact-intro">
+    <h2 id="contact-title">Get in touch</h2>
+    <p>Hiring for a fresher role, or want to talk about one of these projects? Send a message, or reach me directly.</p>
+    <ul class="contact-direct" role="list">
+      <li><a href="mailto:{{ profile.email }}">{{ profile.email }}</a></li>
+      <li><a href="tel:{{ profile.phone | replace('-', '') }}">{{ profile.phone }}</a></li>
+      <li><a href="{{ profile.linkedin }}" rel="noopener" target="_blank">LinkedIn</a></li>
+    </ul>
+  </div>
+
+  <form class="contact-form" method="post" action="{{ url_for('site.contact') }}#contact" novalidate data-contact-form>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}<p class="notice" role="status">{{ messages[0] }}</p>{% endif %}
+    {% endwith %}
+    {% if errors %}<p class="notice notice-error" role="alert">Fix the highlighted fields, then send again.</p>{% endif %}
+
+    {% for field, label, kind in [("name", "Your name", "text"), ("email", "Email", "email")] %}
+    <div class="field{% if errors[field] %} has-error{% endif %}">
+      <label for="{{ field }}">{{ label }}</label>
+      <input id="{{ field }}" name="{{ field }}" type="{{ kind }}" value="{{ form[field] }}"
+             autocomplete="{{ 'name' if field == 'name' else 'email' }}" required
+             {% if errors[field] %}aria-invalid="true" aria-describedby="{{ field }}-error"{% endif %}>
+      <p class="field-error" id="{{ field }}-error">{{ errors[field] }}</p>
+    </div>
+    {% endfor %}
+
+    <div class="field{% if errors.message %} has-error{% endif %}">
+      <label for="message">Message</label>
+      <textarea id="message" name="message" rows="6" maxlength="2000" required
+                {% if errors.message %}aria-invalid="true" aria-describedby="message-error"{% endif %}>{{ form.message }}</textarea>
+      <p class="field-error" id="message-error">{{ errors.message }}</p>
+    </div>
+
+    <div class="hp" aria-hidden="true">
+      <label for="website">Leave this empty</label>
+      <input id="website" name="website" type="text" tabindex="-1" autocomplete="off">
+    </div>
+
+    <button class="btn btn-primary" type="submit">Send message</button>
+  </form>
+</section>
 {% endblock %}
 {% block scripts %}
 <script src="{{ url_for('static', filename='js/stego.js') }}" defer></script>
+<script src="{{ url_for('static', filename='js/contact.js') }}" defer></script>
 {% endblock %}
