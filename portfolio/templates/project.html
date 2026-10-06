@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% from "_macros.html" import stack_list %}
+{% block title %}{{ project.title }} – {{ profile.name }}{% endblock %}
+{% block content %}
+<article class="wrap project">
+  <a class="back" href="{{ url_for('site.home') }}#work">Back to all projects</a>
+  <header class="project-head">
+    <p class="project-date">{{ project.date }}</p>
+    <h1>{{ project.title }}</h1>
+    <p class="project-summary">{{ project.summary }}</p>
+    {{ stack_list(project.stack) }}
+  </header>
+
+  <section class="project-body" aria-label="What I built">
+    <h2>What I built</h2>
+    <ul class="points">
+      {% for point in project.points %}<li>{{ point }}</li>{% endfor %}
+    </ul>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="{{ project.repo }}" rel="noopener" target="_blank">View code on GitHub</a>
+      {% if project.demo %}
+      <a class="btn" href="{{ project.demo }}" rel="noopener" target="_blank">Open live demo</a>
+      {% endif %}
+    </div>
+  </section>
+
+  <aside class="project-others" aria-labelledby="others-title">
+    <h2 id="others-title">Other projects</h2>
+    <ul class="more" role="list">
+      {% for p in others %}
+      <li><a href="{{ url_for('site.project', slug=p.slug) }}">{{ p.title }}</a><span>{{ p.summary }}</span></li>
+      {% endfor %}
+    </ul>
+  </aside>
+</article>
+{% endblock %}

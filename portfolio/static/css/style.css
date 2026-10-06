@@ -155,3 +155,47 @@ img { max-width: 100%; display: block; }
 @media (max-width: 640px) {
   .stego-canvas { aspect-ratio: 3 / 2; }
 }
+
+/* ---------- Projects ---------- */
+.stack { display: flex; flex-wrap: wrap; gap: 0.4rem; list-style: none; padding: 0; margin: 0; }
+.stack li {
+  font-size: var(--step--1); font-weight: 500;
+  padding: 0.15rem 0.6rem;
+  border: 1px solid var(--rule); border-radius: 99px; color: var(--muted);
+}
+
+.featured { list-style: none; margin: 0; padding: 0; border-top: 1.5px solid var(--ink); }
+.featured-item {
+  display: grid; grid-template-columns: 8rem 1fr auto; gap: 1.5rem;
+  align-items: start; padding: 2rem 0; border-bottom: 1px solid var(--rule);
+}
+.featured-date { color: var(--muted); font-weight: 500; margin: 0.4rem 0 0; }
+.featured-body h3 { font-size: var(--step-2); margin-bottom: 0.35rem; }
+.featured-body h3 a { color: var(--ink); text-decoration: none; }
+.featured-body h3 a:hover { color: var(--cobalt); }
+.featured-body p { color: var(--muted); margin-bottom: 0.9rem; }
+.featured-link { font-weight: 600; margin-top: 0.6rem; white-space: nowrap; }
+
+.more-title { margin-top: 3rem; }
+.more { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.75rem; }
+.more li { display: grid; grid-template-columns: minmax(10rem, 16rem) 1fr; gap: 1rem; }
+.more a { font-weight: 600; }
+.more span { color: var(--muted); }
+
+.project { padding-top: 3rem; }
+.back { font-weight: 500; }
+.project-head { margin: 2rem 0 3rem; padding-bottom: 2.5rem; border-bottom: 1.5px solid var(--ink); }
+.project-head h1 { font-size: var(--step-4); font-weight: 800; letter-spacing: -0.035em; line-height: 0.95; }
+.project-date { color: var(--muted); font-weight: 500; }
+.project-summary { font-size: var(--step-1); line-height: 1.45; margin-bottom: 1.25rem; }
+.project-body h2, .project-others h2 { font-size: var(--step-2); }
+.points { padding-left: 1.2rem; max-width: var(--measure); margin: 0 0 2rem; }
+.points li { margin-bottom: 0.6rem; }
+.points li::marker { color: var(--signal); }
+.project-others { margin-top: 4rem; }
+
+@media (max-width: 720px) {
+  .featured-item { grid-template-columns: 1fr; gap: 0.5rem; }
+  .featured-date { margin: 0; }
+  .more li { grid-template-columns: 1fr; gap: 0.1rem; }
+}

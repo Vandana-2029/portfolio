@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% from "_macros.html" import stack_list %}
 {% block content %}
 <section class="hero wrap" aria-labelledby="hero-title">
   <p class="hero-meta">{{ profile.role }} in {{ profile.location }}</p>
@@ -17,6 +18,37 @@
     </figcaption>
     <p class="visually-hidden" aria-live="polite" data-stego-live></p>
   </figure>
+</section>
+
+<section id="work" class="section wrap" aria-labelledby="work-title">
+  <div class="section-head">
+    <h2 id="work-title">Selected work</h2>
+    <p>Three projects I'd most like to talk about in an interview, then a few more from GitHub.</p>
+  </div>
+
+  <ol class="featured" role="list">
+    {% for p in featured %}
+    <li class="featured-item">
+      <p class="featured-date">{{ p.date }}</p>
+      <div class="featured-body">
+        <h3><a href="{{ url_for('site.project', slug=p.slug) }}">{{ p.title }}</a></h3>
+        <p>{{ p.summary }}</p>
+        {{ stack_list(p.stack) }}
+      </div>
+      <a class="featured-link" href="{{ url_for('site.project', slug=p.slug) }}" aria-label="Read about {{ p.title }}">Read more</a>
+    </li>
+    {% endfor %}
+  </ol>
+
+  <h3 class="more-title">More on GitHub</h3>
+  <ul class="more" role="list">
+    {% for p in more %}
+    <li>
+      <a href="{{ url_for('site.project', slug=p.slug) }}">{{ p.title }}</a>
+      <span>{{ p.summary }}</span>
+    </li>
+    {% endfor %}
+  </ul>
 </section>
 {% endblock %}
 {% block scripts %}

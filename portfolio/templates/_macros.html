@@ -1,0 +1,5 @@
+{% macro stack_list(items) -%}
+<ul class="stack" aria-label="Built with">
+  {%- for s in items %}<li>{{ s }}</li>{% endfor -%}
+</ul>
+{%- endmacro %}
