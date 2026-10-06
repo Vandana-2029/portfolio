@@ -69,6 +69,35 @@
     </dl>
   </div>
 </section>
+
+<section id="background" class="section wrap" aria-labelledby="bg-title">
+  <div class="section-head">
+    <h2 id="bg-title">Education and certifications</h2>
+  </div>
+  <div class="background-grid">
+    <ol class="timeline" role="list">
+      {% for e in education %}
+      <li>
+        <p class="timeline-period">{{ e.period }}</p>
+        <h3>{{ e.title }}</h3>
+        <p class="timeline-place">{{ e.place }}, {{ e.detail }}</p>
+      </li>
+      {% endfor %}
+    </ol>
+    <div>
+      <h3>Certifications</h3>
+      <ul class="certs" role="list">
+        {% for name, issuer, yr in certificates %}
+        <li><span class="cert-name">{{ name }}</span><span class="cert-meta">{{ issuer }}, {{ yr }}</span></li>
+        {% endfor %}
+      </ul>
+      <h3 class="beyond-title">Off the screen</h3>
+      <ul class="points">
+        {% for b in beyond %}<li>{{ b }}</li>{% endfor %}
+      </ul>
+    </div>
+  </div>
+</section>
 {% endblock %}
 {% block scripts %}
 <script src="{{ url_for('static', filename='js/stego.js') }}" defer></script>

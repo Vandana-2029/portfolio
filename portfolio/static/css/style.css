@@ -216,3 +216,23 @@ img { max-width: 100%; display: block; }
 @media (max-width: 860px) {
   .about { grid-template-columns: 1fr; gap: 2rem; }
 }
+
+/* ---------- Education ---------- */
+.background-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+.timeline { list-style: none; margin: 0; padding: 0 0 0 1.5rem; border-left: 2px solid var(--rule); }
+.timeline li { position: relative; padding-bottom: 2rem; }
+.timeline li::before {
+  content: ""; position: absolute; left: calc(-1.5rem - 7px); top: 0.45rem;
+  width: 12px; height: 12px; background: var(--signal); border: 2px solid var(--paper);
+}
+.timeline h3 { margin-bottom: 0.2rem; }
+.timeline-period { color: var(--muted); font-weight: 500; margin-bottom: 0.25rem; }
+.timeline-place { color: var(--muted); margin: 0; }
+.certs { list-style: none; margin: 0 0 2.5rem; padding: 0; }
+.certs li { display: grid; padding: 0.7rem 0; border-bottom: 1px solid var(--rule); }
+.certs li:first-child { border-top: 1px solid var(--rule); }
+.cert-name { font-weight: 600; }
+.cert-meta { color: var(--muted); font-size: var(--step--1); }
+@media (max-width: 860px) {
+  .background-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+}
