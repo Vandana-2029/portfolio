@@ -1,4 +1,8 @@
+from datetime import date
+
 from flask import Flask
+
+from . import content
 
 
 def create_app(test_config=None):
@@ -7,8 +11,11 @@ def create_app(test_config=None):
     if test_config:
         app.config.update(test_config)
 
-    @app.route("/")
-    def home():
-        return "Vandana Kumari - portfolio coming soon"
+    @app.context_processor
+    def inject_globals():
+        return {"profile": content.PROFILE, "year": date.today().year}
+
+    from .views import bp
+    app.register_blueprint(bp)
 
     return app
