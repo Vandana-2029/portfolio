@@ -9,7 +9,9 @@ bp = Blueprint("site", __name__)
 def home():
     featured = [p for p in content.PROJECTS if p["featured"]]
     more = [p for p in content.PROJECTS if not p["featured"]]
-    return render_template("home.html", featured=featured, more=more)
+    return render_template(
+        "home.html", featured=featured, more=more, skills=content.SKILLS
+    )
 
 
 @bp.route("/projects/<slug>")
