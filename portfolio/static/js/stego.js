@@ -26,15 +26,19 @@
   function buildMask() {
     const words = figure.dataset.message.split(" ");
     const narrow = canvas.clientWidth < 640;
-    const lines = narrow ? words : [words.join(" ")];
+    // Narrow screens: one word per line. Wide: two balanced lines.
+    const half = Math.ceil(words.length / 2);
+    const lines = narrow
+      ? words
+      : [words.slice(0, half).join(" "), words.slice(half).join(" ")].filter(Boolean);
     const off = document.createElement("canvas");
     off.width = cols; off.height = rows;
     const o = off.getContext("2d");
     o.fillStyle = "#000";
     o.textAlign = "center";
     o.textBaseline = "middle";
-    const lineH = rows / (lines.length + 0.6);
-    let size = lineH * 0.95;
+    const lineH = rows / (lines.length + 0.35);
+    let size = lineH * 1.05;
     o.font = `800 ${size}px "Bricolage Grotesque", sans-serif`;
     const widest = Math.max(...lines.map((l) => o.measureText(l).width));
     if (widest > cols * 0.9) size *= (cols * 0.9) / widest;
@@ -44,7 +48,7 @@
     });
     const data = o.getImageData(0, 0, cols, rows).data;
     mask = new Uint8Array(cols * rows);
-    for (let i = 0; i < mask.length; i++) mask[i] = data[i * 4 + 3] > 110 ? 1 : 0;
+    for (let i = 0; i < mask.length; i++) mask[i] = data[i * 4 + 3] > 90 ? 1 : 0;
   }
 
   function setup() {
@@ -99,10 +103,11 @@
         const n = noise[i];
         const size = cell - 3;
         if (mask[i]) {
-          ctx.globalAlpha = 0.28 + n * 0.3 + r * 0.6;
-          ctx.fillStyle = r > 0.35 ? (n > 0.55 ? signal : cobalt) : (n > 0.5 ? muted : rule);
+          const base = 0.25 + n * 0.45;
+          ctx.globalAlpha = base + (1 - base) * r;
+          ctx.fillStyle = r > 0.3 ? (n > 0.78 ? signal : cobalt) : (n > 0.5 ? muted : rule);
         } else {
-          ctx.globalAlpha = (0.25 + n * 0.45) * (1 - r * 0.55);
+          ctx.globalAlpha = (0.25 + n * 0.45) * (1 - r * 0.7);
           ctx.fillStyle = n > 0.5 ? muted : rule;
         }
         ctx.fillRect(cx - size / 2, cy - size / 2, size, size);

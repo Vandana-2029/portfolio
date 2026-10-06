@@ -38,7 +38,7 @@
 
 /* ---------- Base ---------- */
 *, *::before, *::after { box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+html { scroll-behavior: smooth; scroll-padding-top: 6.5rem; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 
 body {
@@ -219,8 +219,9 @@ img { max-width: 100%; display: block; }
 
 /* ---------- Education ---------- */
 .background-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
-.timeline { list-style: none; margin: 0; padding: 0 0 0 1.5rem; border-left: 2px solid var(--rule); }
+.timeline { align-self: start; list-style: none; margin: 0; padding: 0 0 0 1.5rem; border-left: 2px solid var(--rule); }
 .timeline li { position: relative; padding-bottom: 2rem; }
+.timeline li:last-child { padding-bottom: 0.25rem; }
 .timeline li::before {
   content: ""; position: absolute; left: calc(-1.5rem - 7px); top: 0.45rem;
   width: 12px; height: 12px; background: var(--signal); border: 2px solid var(--paper);
@@ -271,3 +272,11 @@ img { max-width: 100%; display: block; }
 /* ---------- 404 ---------- */
 .notfound { padding-top: clamp(4rem, 12vw, 9rem); }
 .notfound h1 { font-size: var(--step-4); font-weight: 800; letter-spacing: -0.035em; line-height: 0.95; }
+
+/* ---------- Small screens ---------- */
+@media (max-width: 520px) {
+  .header-row { flex-wrap: wrap; padding-block: 0.6rem; row-gap: 0.25rem; }
+  .site-header nav { width: 100%; }
+  .nav { justify-content: space-between; gap: 0.5rem; }
+  .hero-actions .btn { flex: 1 1 auto; justify-content: center; }
+}
