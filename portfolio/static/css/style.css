@@ -267,3 +267,7 @@ img { max-width: 100%; display: block; }
 @media (max-width: 860px) {
   .contact { grid-template-columns: 1fr; gap: 2rem; }
 }
+
+/* ---------- 404 ---------- */
+.notfound { padding-top: clamp(4rem, 12vw, 9rem); }
+.notfound h1 { font-size: var(--step-4); font-weight: 800; letter-spacing: -0.035em; line-height: 0.95; }

@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}Page not found – {{ profile.name }}{% endblock %}
+{% block content %}
+<section class="wrap notfound">
+  <h1>Nothing hidden here</h1>
+  <p>This address doesn't match any page on the site. It may have been mistyped or the project was renamed.</p>
+  <a class="btn btn-primary" href="{{ url_for('site.home') }}">Go to the home page</a>
+</section>
+{% endblock %}

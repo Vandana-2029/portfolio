@@ -7,6 +7,7 @@
   <p class="hero-lede">{{ profile.tagline }}</p>
   <div class="hero-actions">
     <a class="btn btn-primary" href="#work">See my projects</a>
+    <a class="btn" href="{{ url_for('site.resume') }}" target="_blank">Open resume (PDF)</a>
     <a class="btn" href="{{ profile.github }}" rel="noopener" target="_blank">GitHub profile</a>
   </div>
 
