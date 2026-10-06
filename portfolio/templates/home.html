@@ -1,4 +1,24 @@
 {% extends "base.html" %}
 {% block content %}
-<section class="wrap"><h1>{{ profile.name }}</h1><p>{{ profile.tagline }}</p></section>
+<section class="hero wrap" aria-labelledby="hero-title">
+  <p class="hero-meta">{{ profile.role }} in {{ profile.location }}</p>
+  <h1 id="hero-title" class="hero-title">Vandana<br>Kumari</h1>
+  <p class="hero-lede">{{ profile.tagline }}</p>
+  <div class="hero-actions">
+    <a class="btn btn-primary" href="#work">See my projects</a>
+    <a class="btn" href="{{ profile.github }}" rel="noopener" target="_blank">GitHub profile</a>
+  </div>
+
+  <figure class="stego" data-message="OPEN TO WORK">
+    <canvas class="stego-canvas" aria-hidden="true"></canvas>
+    <figcaption class="stego-caption">
+      <span>This grid hides a message in its pixels, the way SecureSteg hides one in a photo. Move across it to read it.</span>
+      <button type="button" class="stego-toggle" aria-pressed="false">Reveal message</button>
+    </figcaption>
+    <p class="visually-hidden" aria-live="polite" data-stego-live></p>
+  </figure>
+</section>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/stego.js') }}" defer></script>
 {% endblock %}
